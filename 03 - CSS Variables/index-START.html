@@ -15,12 +15,27 @@
     <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
 
     <label for="base">Base Color</label>
-    <input id="base" type="color" name="base" value="#ffc600">
+    <input id="base" type="color" name="base" value="#BADA55">
   </div>
 
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root {
+      --base: #BADA55;
+      --spacing:10px;
+      --blur: 10px;
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .hl {
+      color: var(--base);
+    }
 
     /*
       misc styles, nothing to do with CSS variables
@@ -45,6 +60,15 @@
   </style>
 
   <script>
+    var inputs = document.querySelectorAll('.controls input'); // on selectionne tous les inputs (nodelist)
+    inputs.forEach(input => input.addEventListener('change', changeValue)); // on ajoute des 'micros' sur chaque input pour détecter les CHANGEMENT de valeur
+    inputs.forEach(input => input.addEventListener('mousemove', changeValue)); // on ajoute des 'micros' sur chaque input pour détecter les MOUVEMENTS DE LA SOURIS
+
+    function changeValue() {
+      var suffix = this.dataset.sizing || ""; // on récupère le suffix s'il y en a un (px pr exemple)
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix, 'important'); // on change la valeur des variable CSS en fonction de la variable des inputs (les inputs doivent avoir les même 'name' que les variables CSS)
+      // document.documentElement récupère tous les éléments du DOM sous forme de nodeList
+    }
   </script>
 
 </body>
