@@ -26,15 +26,45 @@
 
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
+    function ageSuperiorTo(age, people) {
+      birthday = people.year;
+      now = new Date().getFullYear();
+      return (now - birthday) >= age;
+    }
+    var major = people.some(people => ageSuperiorTo(19, people));
+    console.log(major);
+    // correction :
+    const isAdult = people.some(person => (new Date().getFullYear()) - person.year >= 19);
+    console.log({isAdult});
+
     // Array.prototype.every() // is everyone 19 or older?
+    var major = people.every(people => ageSuperiorTo(19, people));
+    console.log(major);
+    // correction :
+    const allAdults = people.every(person => (new Date().getFullYear()) - person.year >= 19);
+    console.log({allAdults});
 
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
+    var superGood = comments.find(comment => comment.id === 823423);
+    console.log(superGood);
 
     // Array.prototype.findIndex()
     // Find the comment with this ID
+    var superGoodIndex = comments.findIndex(comment => comment.id === 823423);
+    console.log(superGoodIndex);
     // delete the comment with the ID of 823423
+    // var deletedComment = comments.splice(superGoodIndex, 1);
+    // console.table(deletedComment);
+    // console.table(comments);
+
+    // another method to keep the original array
+    const newComments = [
+      ...comments.slice(0, superGoodIndex),
+      ...comments.slice(superGoodIndex + 1)
+    ];
+    console.table(newComments);
 
   </script>
 </body>
