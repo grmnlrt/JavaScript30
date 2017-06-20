@@ -7,6 +7,22 @@
 </head>
 <body>
 <script>
+  const user = [];
+  const konamiCode = "jesus"
+
+  document.addEventListener('keyup', (e) => {
+    user.push(e.key);
+    var valueA = (-konamiCode.length -1);
+    var valueB = user.length - konamiCode.length;
+    console.log(valueA);
+    console.log(valueB);
+    user.splice(valueA, valueB);
+    console.log(user);
+
+    if (user.join('') === konamiCode) {
+      cornify_add();
+    }
+  });
 </script>
 </body>
 </html>
