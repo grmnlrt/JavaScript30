@@ -214,6 +214,31 @@
 </style>
 
 <script>
+  const lists = document.querySelectorAll('.cool > li');
+  const background = document.querySelector('.dropdownBackground')
+  const navBar = document.querySelector('.top')
+
+  function mouseEnter() {
+    this.classList.add('trigger-enter');
+    setTimeout(() => this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active'), 150);
+    background.classList.add('open');
+    let height = this.children[1].offsetHeight;
+    let width = this.children[1].offsetWidth;
+    let left = this.children[1].getBoundingClientRect().left;
+    background.style.height = height + 'px';
+    background.style.width = width + 'px';
+    background.style.top = navBar.offsetHeight + 'px';
+    background.style.left = left + 'px';
+  }
+
+  function mouseLeave() {
+    background.classList.remove('open');
+    this.classList.remove('trigger-enter');
+    this.classList.remove('trigger-enter-active');
+  }
+
+  lists.forEach( list => list.addEventListener('mouseenter', mouseEnter));
+  lists.forEach( list => list.addEventListener('mouseleave', mouseLeave));
 </script>
 
 </body>
